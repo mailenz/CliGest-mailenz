@@ -10,8 +10,9 @@
  * Boot files are your "main.js"
  **/
 
-import App from 'app/src/App.vue'
 
+
+import App from 'app/src/App.vue'
 let appPrefetch = typeof App.preFetch === 'function'
   ? App.preFetch
   : (
@@ -19,22 +20,19 @@ let appPrefetch = typeof App.preFetch === 'function'
     App.__c !== void 0 && typeof App.__c.preFetch === 'function'
       ? App.__c.preFetch
       : false
-  )
+    )
+
 
 function getMatchedComponents (to, router) {
   const route = to
     ? (to.matched ? to : router.resolve(to).route)
     : router.currentRoute.value
 
-  if (!route) {
-    return []
-  }
+  if (!route) { return [] }
 
   const matched = route.matched.filter(m => m.components !== void 0)
 
-  if (matched.length === 0) {
-    return []
-  }
+  if (matched.length === 0) { return [] }
 
   return Array.prototype.concat.apply([], matched.map(m => {
     return Object.keys(m.components).map(key => {
@@ -47,11 +45,7 @@ function getMatchedComponents (to, router) {
   }))
 }
 
-export function addPreFetchHooks ({
-  router,
-  store,
-  publicPath
-}) {
+export function addPreFetchHooks ({ router, store, publicPath }) {
   // Add router hook for handling preFetch.
   // Doing it after initial route is resolved so that we don't double-fetch
   // the data that we already have. Using router.beforeResolve() so that all
@@ -78,10 +72,12 @@ export function addPreFetchHooks ({
       ))
       .map(m => m.c.__c !== void 0 ? m.c.__c.preFetch : m.c.preFetch)
 
+    
     if (appPrefetch !== false) {
       preFetchList.unshift(appPrefetch)
       appPrefetch = false
     }
+    
 
     if (preFetchList.length === 0) {
       return next()
@@ -93,11 +89,11 @@ export function addPreFetchHooks ({
       next(url)
     }
     const proceed = () => {
-
-      if (hasRedirected === false) {
-        next()
-      }
+      
+      if (hasRedirected === false) { next() }
     }
+
+    
 
     preFetchList.reduce(
       (promise, preFetch) => promise.then(() => hasRedirected === false && preFetch({
@@ -110,10 +106,10 @@ export function addPreFetchHooks ({
       })),
       Promise.resolve()
     )
-      .then(proceed)
-      .catch(e => {
-        console.error(e)
-        proceed()
-      })
+    .then(proceed)
+    .catch(e => {
+      console.error(e)
+      proceed()
+    })
   })
 }

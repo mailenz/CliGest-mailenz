@@ -1,7 +1,8 @@
 import { api } from 'boot/axios'
 // State : données du magasin
 const state = {
-  clients: []
+  clients: [],
+  loadedClients: false
 }
 /*
 Mutations : méthode qui manipulent les données
@@ -10,6 +11,9 @@ Les mutations ne peuvent pas être asynchrones !!!
 const mutations = {
   setClients (state, clients) {
     state.clients = clients
+  },
+  setLoadedClients (state) {
+    state.loadedClients = true
   }
 }
 /*
@@ -21,6 +25,7 @@ const actions = {
     api.get('/?results=100&nat=CH')
       .then(function (response) {
         commit('setClients', response.data.results)
+        commit('setLoadedClients')
       })
       .catch(function (error) {
         console.log(error)
@@ -36,6 +41,9 @@ const getters = {
   // Prend le state comme 1er paramètre
   clients: (state) => {
     return state.clients
+  },
+  isLoadedClients: (state) => {
+    return state.loadedClients
   }
 }
 /*

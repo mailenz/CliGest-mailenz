@@ -35,7 +35,9 @@ export default {
     }
   },
   mounted () {
-    this.getClientsApi()
+    if (!this.$store.getters.isLoadedClients) {
+      this.getClientsApi()
+    }
   },
   components: {
     client: require('components/client').default

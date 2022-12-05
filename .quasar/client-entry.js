@@ -10,38 +10,60 @@
  * Boot files are your "main.js"
  **/
 
+
 import { createApp } from 'vue'
+
+
+
+
+
+
 
 import '@quasar/extras/roboto-font/roboto-font.css'
 
 import '@quasar/extras/material-icons/material-icons.css'
 
+
+
+
 // We load Quasar stylesheet file
 import 'quasar/dist/quasar.sass'
 
+
+
+
 import 'src/css/app.sass'
+
 
 import createQuasarApp from './app.js'
 import quasarUserOptions from './quasar-user-options.js'
 
+
+
+
+
+
 console.info('[Quasar] Running SPA.')
 
+
+
+
+
 const publicPath = ``
+
 
 async function start ({
   app,
   router
-  ,
-  store,
-  storeKey
+  , store, storeKey
 }, bootFiles) {
+  
 
+  
   let hasRedirected = false
   const getRedirectUrl = url => {
-    try {
-      return router.resolve(url).href
-    } catch (err) {
-    }
+    try { return router.resolve(url).href }
+    catch (err) {}
 
     return Object(url) === url
       ? null
@@ -77,7 +99,8 @@ async function start ({
         urlPath,
         publicPath
       })
-    } catch (err) {
+    }
+    catch (err) {
       if (err && err.url) {
         redirect(err.url)
         return
@@ -91,11 +114,22 @@ async function start ({
   if (hasRedirected === true) {
     return
   }
+  
 
   app.use(router)
   app.use(store, storeKey)
 
-  app.mount('#q-app')
+  
+
+    
+
+    
+      app.mount('#q-app')
+    
+
+    
+
+  
 
 }
 
@@ -103,7 +137,7 @@ createQuasarApp(createApp, quasarUserOptions)
 
   .then(app => {
     // eventually remove this when Cordova/Capacitor/Electron support becomes old
-    const [method, mapFn] = Promise.allSettled !== void 0
+    const [ method, mapFn ] = Promise.allSettled !== void 0
       ? [
         'allSettled',
         bootFiles => bootFiles.map(result => {
@@ -119,10 +153,10 @@ createQuasarApp(createApp, quasarUserOptions)
         bootFiles => bootFiles.map(entry => entry.default)
       ]
 
-    return Promise[method]([
-
+    return Promise[ method ]([
+      
       import(/* webpackMode: "eager" */ 'boot/axios')
-
+      
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')
       start(app, boot)
