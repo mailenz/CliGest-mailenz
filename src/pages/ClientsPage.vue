@@ -2,8 +2,8 @@
   <q-page padding>
     <h3>Liste des clients</h3>
     <q-list
-      class="rounded-borders"
       bordered
+      class="rounded-borders"
       separator
     >
       <!-- Un élément de liste, un client -->
@@ -19,7 +19,7 @@
 
 <script>
 // importation des fonctions utilitaires
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ClientsPage',

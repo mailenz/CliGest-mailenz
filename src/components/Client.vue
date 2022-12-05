@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable v-ripple>
+  <q-item v-ripple clickable>
     <!-- Photo du client -->
     <q-item-section avatar>
       <q-avatar>
@@ -10,7 +10,7 @@
     <!-- Nom, prénom et email du client -->
     <q-item-section>
       <q-item-label lines="1">
-        {{ client.name.first + " " + client.name.last }}
+        {{ client.name.first + ' ' + client.name.last }}
       </q-item-label>
       <q-item-label caption lines="2">
         {{ client.email }}
@@ -19,7 +19,7 @@
 
     <!-- Icône email -->
     <q-item-section side>
-      <q-icon name="email" color="primary"/>
+      <q-icon color="primary" name="email"/>
     </q-item-section>
   </q-item>
 </template>
