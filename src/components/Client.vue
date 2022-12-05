@@ -11,6 +11,7 @@
     <q-item-section>
       <q-item-label lines="1">
         {{ client.name.first + ' ' + client.name.last }}
+        <!-- TODO {{ client.name.first }} {{ client.name.last }} -->
       </q-item-label>
       <q-item-label caption lines="2">
         {{ client.email }}
@@ -27,7 +28,7 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Client',
+  name: 'Client', // TODO nom de composants avec min deux mot-clés ClientItem et renommer le fichier
   props: {
     client: {
       type: Object,

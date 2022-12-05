@@ -7,6 +7,8 @@
       separator
     >
       <!-- Un élément de liste, un client -->
+      <!-- TODO tester si liste vide et afficher message -->
+      <!-- TODO afficher loader durant chargement -->
       <client
         v-for="client in clients"
         :key="client.id"
@@ -25,16 +27,17 @@ export default {
   name: 'ClientsPage',
   computed: {
     // Mappage des getters ('nomNamespace', ['nomGetter'])
-    ...mapGetters('clients', ['clients'])
+    ...mapGetters('clients', ['clients']) // TODO importer isLoadedClients
   },
   methods: {
     ...mapActions('clients', ['getClientsApi']),
-    refresh (done) {
+    refresh (done) { // TODO inutile, supprimer la méthode refresh
       this.getClientsApi()
       done()
     }
   },
   mounted () {
+    // TODO Simplifier :  if (!this.isLoadedClients) {
     if (!this.$store.getters.isLoadedClients) {
       this.getClientsApi()
     }

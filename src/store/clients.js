@@ -9,11 +9,11 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
-  setClients (state, clients) {
+  setClients (state, clients) { // TODO écrire en majuscules SET_CLIENTS
     state.clients = clients
   },
-  setLoadedClients (state) {
-    state.loadedClients = true
+  setLoadedClients (state) { // TODO écrire en majuscules
+    state.loadedClients = true // TODO doit pouvoir être false
   }
 }
 /*
@@ -22,13 +22,15 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   getClientsApi ({ commit }) {
+    // TODO laoded a false
     api.get('/?results=100&nat=CH')
       .then(function (response) {
         commit('setClients', response.data.results)
-        commit('setLoadedClients')
+        commit('setLoadedClients') // TODO laoded a true
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error) // TODO Remplacer par Q-Dialog https://quasar.dev/quasar-plugins/dialog
+        // TODO laoded a false
       })
   }
 }
@@ -40,6 +42,7 @@ Sert à calculer, trier, filtrer ou formater les donneés
 const getters = {
   // Prend le state comme 1er paramètre
   clients: (state) => {
+    // TODO trier les données par nom et prénom AZ
     return state.clients
   },
   isLoadedClients: (state) => {
