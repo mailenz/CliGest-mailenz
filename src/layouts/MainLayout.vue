@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-purple-6">
         <q-btn
           aria-label="Menu"
           dense
@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          CliGest
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Mailenz</div>
       </q-toolbar>
     </q-header>
 
